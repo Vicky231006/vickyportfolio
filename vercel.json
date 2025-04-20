@@ -4,11 +4,11 @@
   "outputDirectory": ".",
   "builds": [
     {
-      "src": ".",
+      "src": "index.html",
       "use": "@vercel/static"
     },
     {
-      "src": "api/**/*.js",
+      "src": "api/*.js",
       "use": "@vercel/node"
     }
   ],

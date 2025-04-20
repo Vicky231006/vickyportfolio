@@ -8,10 +8,10 @@
     "start": "serve ."
   },
   "dependencies": {
-    "@vercel/node": "^3.0.0",
-    "dotenv": "^16.5.0",
+    "serve": "^14.2.1",
     "nodemailer": "^6.9.9",
-    "serve": "^14.2.1"
+    "@vercel/node": "^3.0.0",
+    "dotenv": "^16.5.0"
   },
   "devDependencies": {
     "@vercel/static-build": "^1.0.0"

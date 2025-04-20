@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ message: 'Method not allowed' });
     }
@@ -13,11 +13,11 @@ module.exports = async (req, res) => {
             return res.status(400).json({ message: 'Please fill in all fields' });
         }
 
-        // Create a transporter with explicit SMTP settings
+        // Create transporter
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 587,
-            secure: false, // true for 465, false for other ports
+            secure: false,
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASSWORD
@@ -30,8 +30,8 @@ module.exports = async (req, res) => {
         // Verify connection configuration
         await transporter.verify();
 
-        // Email content
-        const mailOptions = {
+        // Send email
+        await transporter.sendMail({
             from: `"${name}" <${process.env.EMAIL_USER}>`,
             to: process.env.EMAIL_USER,
             replyTo: email,
@@ -41,19 +41,8 @@ module.exports = async (req, res) => {
                 Email: ${email}
                 Subject: ${subject}
                 Message: ${message}
-            `,
-            html: `
-                <h3>New Contact Form Submission</h3>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Subject:</strong> ${subject}</p>
-                <p><strong>Message:</strong></p>
-                <p>${message}</p>
             `
-        };
-
-        // Send email
-        await transporter.sendMail(mailOptions);
+        });
 
         return res.status(200).json({ message: 'Message sent successfully!' });
     } catch (error) {
@@ -63,4 +52,4 @@ module.exports = async (req, res) => {
             error: error.message 
         });
     }
-}; 
+} 

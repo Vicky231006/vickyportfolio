@@ -1,0 +1,19 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Personal Portfolio Website",
+  "scripts": {
+    "dev": "serve .",
+    "build": "echo 'No build step required for static site'",
+    "start": "serve ."
+  },
+  "dependencies": {
+    "@vercel/node": "^3.0.0",
+    "dotenv": "^16.5.0",
+    "nodemailer": "^6.9.9",
+    "serve": "^14.2.1"
+  },
+  "devDependencies": {
+    "@vercel/static-build": "^1.0.0"
+  }
+}

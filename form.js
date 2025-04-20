@@ -20,16 +20,22 @@ function handleForm() {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
 
-            const response = await fetch('/api/contact', {
+            // Get the current domain
+            const baseUrl = window.location.origin;
+            const apiUrl = `${baseUrl}/api/contact`;
+
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(data)
             });
 
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || 'Network response was not ok');
             }
 
             const result = await response.json();

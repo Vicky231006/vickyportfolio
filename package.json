@@ -4,7 +4,7 @@
   "description": "Personal Portfolio Website",
   "scripts": {
     "dev": "serve .",
-    "build": "echo 'No build step required for static site'",
+    "build": "cp -r . dist/",
     "start": "serve ."
   },
   "dependencies": {

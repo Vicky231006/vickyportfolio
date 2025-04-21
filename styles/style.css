@@ -604,12 +604,15 @@ a, button, input, textarea {
     gap: 2rem;
     margin: 1.5rem 0;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .tech-img img {
     width: 4rem;
     height: 4rem;
     transition: transform 0.3s ease;
+    object-fit: contain;
 }
 
 .tech-buttons {
@@ -638,10 +641,23 @@ a, button, input, textarea {
         grid-template-columns: 1fr;
         min-height: auto;
         padding: 2rem;
+        width: 90%;
+        margin: 0 auto;
     }
 
     .project-preview {
         height: 250px;
+        padding-top: 0;
+    }
+
+    .tech-img {
+        gap: 2.5rem;
+        padding: 1rem;
+    }
+
+    .tech-img img {
+        width: 5rem;
+        height: 5rem;
     }
 }
 
@@ -653,6 +669,65 @@ a, button, input, textarea {
     .tech-buttons {
         flex-direction: row;
         justify-content: center;
+        gap: 1rem;
+    }
+
+    .tech-buttons a {
+        min-width: 120px;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .project-info h3 {
+        font-size: 2.4rem;
+        text-align: center;
+    }
+
+    .project-info p {
+        text-align: center;
+    }
+
+    .feature-list {
+        padding-left: 2rem;
+    }
+
+    .tech-img {
+        gap: 2rem;
+    }
+
+    .tech-img img {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .project {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .project-preview {
+        height: 180px;
+    }
+
+    .tech-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tech-buttons a {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .tech-img {
+        gap: 1.8rem;
+        justify-content: center;
+    }
+
+    .tech-img img {
+        width: 4rem;
+        height: 4rem;
     }
 }
 

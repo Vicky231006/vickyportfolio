@@ -10,48 +10,54 @@ function handleForm() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        console.log('Form submission started');
         
-        // Use the elements we already found
         submitButton.disabled = true;
-        status.textContent = 'Sending...';
-        status.style.color = '#4CAF50';
+        status.textContent = 'Processing...';
+        status.className = 'form-status warning';
 
         try {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
+            console.log('Form data:', data);
 
-            // Get the current domain
-            const baseUrl = window.location.origin;
-            const apiUrl = `${baseUrl}/api/contact`;
-
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.message || 'Network response was not ok');
+            // Basic validation
+            if (!data.name || !data.email || !data.subject || !data.message) {
+                throw new Error('Please fill in all fields');
             }
 
-            const result = await response.json();
-            status.textContent = result.message || 'Message sent successfully!';
-            status.style.color = '#4CAF50';
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) {
+                throw new Error('Please enter a valid email address');
+            }
+
+            // Create mailto link
+            const mailtoLink = document.createElement('a');
+            const recipientEmail = 'vickydsilva2004@gmail.com'; // Replace with your email
+            const emailSubject = encodeURIComponent(data.subject);
+            const emailBody = encodeURIComponent(
+                `Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
+            );
+            mailtoLink.href = `mailto:${recipientEmail}?subject=${emailSubject}&body=${emailBody}`;
+            
+            // Trigger the mailto link
+            mailtoLink.click();
+            
+            // Show success message
+            status.textContent = 'Your default email client has been opened. Please send the email to complete the process.';
+            status.className = 'form-status success';
             form.reset();
+
         } catch (error) {
             console.error('Error:', error);
-            status.textContent = 'Failed to send message. Please try again later.';
-            status.style.color = '#f44336';
+            status.textContent = error.message || 'Failed to process form. Please try again.';
+            status.className = 'form-status error';
         } finally {
             submitButton.disabled = false;
         }
     }
 
-    // Add event listener to form
     form.addEventListener('submit', handleSubmit);
 }
 

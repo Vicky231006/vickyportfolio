@@ -2,15 +2,18 @@
   "name": "portfolio",
   "version": "1.0.0",
   "description": "Personal Portfolio Website",
+  "type": "module",
   "scripts": {
-    "dev": "serve .",
-    "start": "serve ."
+    "dev": "vercel dev",
+    "start": "vercel dev",
+    "build": "echo 'No build step required for API-only project'"
   },
   "dependencies": {
-    "serve": "^14.2.1",
-    "nodemailer": "^6.9.9",
     "@vercel/node": "^3.0.0",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^6.9.9",
+    "serve": "^14.2.1"
   },
   "devDependencies": {
     "@vercel/static-build": "^1.0.0"

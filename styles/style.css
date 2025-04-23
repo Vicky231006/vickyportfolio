@@ -425,37 +425,71 @@ a, button, input, textarea {
 .edu {
     height: 400px;
     width: 350px;
-    outline: 3px solid rgb(184, 255, 178);
-    border-radius: 1rem;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     position: absolute;
     margin: 0 auto;
     opacity: 0;
-    transition: .8s;
+    transition: all 0.5s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
 }
 
 .top {
-    background-color: red;
     text-align: center;
-    height: 80%;
-    border-radius: 1rem 1rem 0 0;
+    height: 35%;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    position: relative;
+    overflow: hidden;
+}
+
+.top::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(to top, rgba(255,255,255,0.2), transparent);
+}
+
+.top h3 {
+    margin: 0;
+    padding: 20px;
+    color: white;
+    font-size: 2.8rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 .edu-logo {
-    outline: 1px solid white;
+    border: 4px solid white;
     border-radius: 50%;
     height: 120px;
     width: 120px;
     position: absolute;
     top: 25%;
     left: calc(50% - 60px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.edu-logo:hover {
+    transform: scale(1.1);
 }
 
 .logo-image {
     border-radius: 50%;
     height: 120px;
     width: 120px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
 .study {
@@ -465,28 +499,55 @@ a, button, input, textarea {
     justify-content: center;
     font-size: 2rem;
     gap: 1.5rem;
+    padding: 2rem;
+    margin-top: 2rem;
+    list-style: none;
+}
+
+.study li {
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.study li:hover {
+    transform: translateX(10px);
 }
 
 .previous, .next {
     position: absolute;
     background: none;
     border: none;
-    font-size: 8rem;
+    font-size: 6rem;
     z-index: 1;
-    top: 35%;
+    top: 45%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    transition: all 0.3s ease;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.previous:hover, .next:hover {
+    transform: translateY(-50%) scale(1.1);
+    opacity: 1;
 }
 
 .previous {
-    left: 200px
+    left: 200px;
 }
 
 .next {
-    right: 200px
+    right: 200px;
 }
 
 .show-card {
     opacity: 1;
     z-index: 1;
+    transform: translateX(0) !important;
 }
 
 .link {

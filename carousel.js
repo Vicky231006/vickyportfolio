@@ -6,6 +6,10 @@ const carousel = () => {
 
     let currentIndex = 0;
 
+    // Initially hide the previous button
+    previousBtn.style.opacity = '0';
+    previousBtn.style.pointerEvents = 'none';
+
     // Add transition class to all cards
     eduCard.forEach(card => {
         card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
@@ -24,6 +28,15 @@ const carousel = () => {
             currentIndex = (currentIndex + 1) % eduCard.length;
         } else {
             currentIndex = (currentIndex - 1 + eduCard.length) % eduCard.length;
+        }
+
+        // Show/hide previous button based on current index
+        if (currentIndex === 0) {
+            previousBtn.style.opacity = '0';
+            previousBtn.style.pointerEvents = 'none';
+        } else {
+            previousBtn.style.opacity = '1';
+            previousBtn.style.pointerEvents = 'auto';
         }
 
         // Add show-card class to current card with a slight delay for smooth transition
